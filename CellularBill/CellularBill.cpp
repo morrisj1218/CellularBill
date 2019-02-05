@@ -27,6 +27,7 @@ int main()
 	double preDay_Charges;
 	double preNight_Charges;
 	double preTotal_AmtDue;
+	bool notValid = true;
 
 	cout << fixed << showpoint << setprecision(2);
 	cout << endl;
@@ -46,87 +47,136 @@ int main()
 		case 'r':
 		case 'R':
 		
+		while (notValid)
+		{
 			cout << "  Enter total number of minutes used: ";
 			cin >> reg_Minutes;
+			cin.clear();
+			cin.ignore(100, '\n');
 			cout << endl;
 
-			if (reg_Minutes <= 50)
+			if (reg_Minutes > 0)
+			{
+				notValid = false;
+			}
+			else
+			{
+				cout << "  Invalid Entry. You must use an integer for total minutes used.\n";
+				cout << "  Please try again.\n";
+				cout << endl;
+			}
+		}
+				
+		if (reg_Minutes <= 50)
 			{
 				regAmountDue = REG_SERVICE_FEE;
 			}
-			else
+		else
 			{
 				regAmountDue = REG_SERVICE_FEE + ((reg_Minutes - 50) * REG_COST_PER_MIN);
 			}
 
-			// DISPLAY REGULAR BILL
-			cout << setw(65) << setfill('*') << " \n" << endl;
+		// DISPLAY REGULAR BILL
+		cout << setw(65) << setfill('*') << " \n" << endl;
 
-			cout << setfill('.') << setw(50) << left << "  Account Number: "
-				<< setfill(' ') << right << " " << setw(7) << accountNum << endl;
-			cout << setfill('.') << setw(50) << left << "  Type of Service: "
-				<< right << " " << "REGULAR" << endl;
-			cout << setfill('.') << setw(50) << left << "  Number of minutes accrued: "
-				<< setfill(' ') << right << " " << setw(7) << reg_Minutes << endl;
-			cout << endl;
+		cout << setfill('.') << setw(50) << left << "  Account Number: "
+			<< setfill(' ') << right << " " << setw(7) << accountNum << endl;
+		cout << setfill('.') << setw(50) << left << "  Type of Service: "
+			<< right << " " << "REGULAR" << endl;
+		cout << setfill('.') << setw(50) << left << "  Number of minutes accrued: "
+			<< setfill(' ') << right << " " << setw(7) << reg_Minutes << endl;
+		cout << endl;
 
-			cout << setfill('.') << setw(50) << left << "  Total Amount Due: "
-				<< setfill(' ') << right << " $" << setw(6) << regAmountDue << endl;
+		cout << setfill('.') << setw(50) << left << "  Total Amount Due: "
+			<< setfill(' ') << right << " $" << setw(6) << regAmountDue << endl;
 		break;
 
 		// CALCULATE PREMIUM
 		case 'p':
 		case 'P':
 		
+		while (notValid)
+		{
 			cout << "  Enter total number of minutes used between 6am and 6pm (DAYTIME): ";
 			cin >> preDay_Minutes;
+			cin.clear();
+			cin.ignore(100, '\n');
 			cout << endl;
 
+			if (preDay_Minutes > 0)
+			{
+				notValid = false;
+			}
+			else
+			{
+				cout << "  Invalid Entry. You must use an integer for total minutes used.\n";
+				cout << "  Please try again.\n";
+				cout << endl;
+			}
+		}
+		
+		notValid = true;
+		while (notValid)
+		{
 			cout << "  Enter total number of minutes used between 6pm and 6am (EVENING): ";
 			cin >> preNight_Minutes;
+			cin.clear();
+			cin.ignore(100, '\n');
 			cout << endl;
 
-			if (preDay_Minutes <= 75)
+			if (preNight_Minutes > 0)
 			{
-				preDay_Charges = 0;
+				notValid = false;
 			}
 			else
 			{
-				preDay_Charges = (preDay_Minutes - 75) * DAY_PER_MIN;
+				cout << "  Invalid Entry. You must use an integer for total minutes used.\n";
+				cout << "  Please try again.\n";
+				cout << endl;
 			}
+		}
+		
+		if (preDay_Minutes <= 75)
+		{
+			preDay_Charges = 0;
+		}
+		else
+		{
+			preDay_Charges = (preDay_Minutes - 75) * DAY_PER_MIN;
+		}
 
-			if (preNight_Minutes <= 100)
-			{
-				preNight_Charges = 0;
-			}
-			else
-			{
-				preNight_Charges = (preNight_Minutes - 100) * NIGHT_PER_MIN;
-			}
+		if (preNight_Minutes <= 100)
+		{
+			preNight_Charges = 0;
+		}
+		else
+		{
+			preNight_Charges = (preNight_Minutes - 100) * NIGHT_PER_MIN;
+		}
 
-			preTotal_AmtDue = PRE_SERVICE_FEE + preDay_Charges + preNight_Charges;
+		preTotal_AmtDue = PRE_SERVICE_FEE + preDay_Charges + preNight_Charges;
 
-			// DISPLAY PREMIUM BILL
-			cout << setw(75) << setfill('*') << " \n" << endl;
+		// DISPLAY PREMIUM BILL
+		cout << setw(75) << setfill('*') << " \n" << endl;
 
-			cout << setfill('.') << setw(50) << left << "  Account Number: "
-				<< setfill(' ') << right << " " << setw(7) << accountNum << endl;
-			cout << setw(50) << setfill('.') << left << "  Type of Service: "
-				<< right << " " << "PREMIUM" << endl;
-			cout << setw(50) << setfill('.') << left << "  DAYTIME minutes accrued: "
-				<< setfill(' ') << right << " " << setw(7) << preDay_Minutes << endl;
-			cout << setw(50) << setfill('.') << left << "  EVENING minutes accrued: "
-				<< setfill(' ') << right << " " << setw(7) << preNight_Minutes << endl;
-			cout << setw(50) << setfill('.') << left << "  Service Fee: "
-				<< setfill(' ') << right << " $" << setw(6) << PRE_SERVICE_FEE << endl;
-			cout << setw(50) << setfill('.') << left << "  Charges for DAYTIME minutes: "
-				<< setfill(' ') << right << " $" << setw(6) << preDay_Charges << endl;
-			cout << setw(50) << setfill('.') << left << "  Charges for EVENING minutes: "
-				<< setfill(' ') << right << " $" << setw(6) << preNight_Charges << endl;
-			cout << endl;
+		cout << setfill('.') << setw(50) << left << "  Account Number: "
+			<< setfill(' ') << right << " " << setw(7) << accountNum << endl;
+		cout << setw(50) << setfill('.') << left << "  Type of Service: "
+			<< right << " " << "PREMIUM" << endl;
+		cout << setw(50) << setfill('.') << left << "  DAYTIME minutes accrued: "
+			<< setfill(' ') << right << " " << setw(7) << preDay_Minutes << endl;
+		cout << setw(50) << setfill('.') << left << "  EVENING minutes accrued: "
+			<< setfill(' ') << right << " " << setw(7) << preNight_Minutes << endl;
+		cout << setw(50) << setfill('.') << left << "  Service Fee: "
+			<< setfill(' ') << right << " $" << setw(6) << PRE_SERVICE_FEE << endl;
+		cout << setw(50) << setfill('.') << left << "  Charges for DAYTIME minutes: "
+			<< setfill(' ') << right << " $" << setw(6) << preDay_Charges << endl;
+		cout << setw(50) << setfill('.') << left << "  Charges for EVENING minutes: "
+			<< setfill(' ') << right << " $" << setw(6) << preNight_Charges << endl;
+		cout << endl;
 
-			cout << setw(50) << setfill('.') << left << "  Total Amount Due: "
-				<< setfill(' ') << right << " $" << setw(6) << preTotal_AmtDue << endl;
+		cout << setw(50) << setfill('.') << left << "  Total Amount Due: "
+			<< setfill(' ') << right << " $" << setw(6) << preTotal_AmtDue << endl;
 
 		break;
 
