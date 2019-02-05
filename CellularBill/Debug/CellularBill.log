@@ -1,0 +1,8 @@
+﻿  CellularBill.cpp
+d:\morri\projects\visual studio 2017\projects\cellularbill\cellularbill\cellularbill.cpp(40): warning C4390: ';': empty controlled statement found; is this the intent?
+d:\morri\projects\visual studio 2017\projects\cellularbill\cellularbill\cellularbill.cpp(26): warning C4101: 'preDay_Charges': unreferenced local variable
+d:\morri\projects\visual studio 2017\projects\cellularbill\cellularbill\cellularbill.cpp(24): warning C4101: 'preNight_Minutes': unreferenced local variable
+d:\morri\projects\visual studio 2017\projects\cellularbill\cellularbill\cellularbill.cpp(27): warning C4101: 'preNight_Charges': unreferenced local variable
+d:\morri\projects\visual studio 2017\projects\cellularbill\cellularbill\cellularbill.cpp(23): warning C4101: 'preDay_Minutes': unreferenced local variable
+d:\morri\projects\visual studio 2017\projects\cellularbill\cellularbill\cellularbill.cpp(28): warning C4101: 'preTotal_AmtDue': unreferenced local variable
+  CellularBill.vcxproj -> D:\morri\Projects\Visual Studio 2017\Projects\CellularBill\Debug\CellularBill.exe
